@@ -1,7 +1,7 @@
-// import firebase from "firebase/app"; // firebase version 8
-import firebase from "firebase/compat/app"; // firebase version 9
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from "firebase/compat/app"; 
+import "firebase/compat/auth"; // 회원가입 등의 작업을 위한 authService 익스포트
+import "firebase/compat/firestore" // 파이어베이스 db를 쓰기 위한 dbServie 익스포트
+import "firebase/compat/storage"
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -16,3 +16,4 @@ firebase.initializeApp(firebaseConfig);
 export const firebaseInstance = firebase;
 export const authService = firebase.auth();
 export const dbService = firebase.firestore();
+export const storageService = firebase.storage();

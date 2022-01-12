@@ -31,7 +31,6 @@ function App() {
       ) : ( // AppRouter 컴포넌트에 userObj를 프롭스로 전달
         "initializing..."
       )}
-      <footer>&copy; {new Date().getFullYear()} Nwitter </footer>
     </>
   );
 }
