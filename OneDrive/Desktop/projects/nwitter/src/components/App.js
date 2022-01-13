@@ -15,8 +15,11 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
-        setIsLoggedIn(user);
-        setUserObj(user);
+        setUserObj({
+          uid: user.uid,
+          displayName: user.displayName,
+          updateProfile: (args) => user.updateProfile(args),
+        });
       }
       else {
         setIsLoggedIn(false);
@@ -25,9 +28,18 @@ function App() {
     });
   }, []);
 
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({
+      uid: user.uid,
+      displayName: user.displayName,
+      updateProfile: (args) => user.updateProfile(args),
+    });
+  };
+
   return (
     <>
-      {init ? (<AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />  
+      {init ? (<AppRouter refreshUser={refreshUser} isLoggedIn={Boolean(userObj)} userObj={userObj} />  
       ) : ( // AppRouter 컴포넌트에 userObj를 프롭스로 전달
         "initializing..."
       )}
