@@ -10,7 +10,7 @@ const Home = ({userObj}) => {
 
     // onSnapshot 함수를 이용하여 실시간 데이터베이스 도입
     useEffect(() => {
-        dbService.collection("nweets").onSnapshot((snapshot) => {
+        dbService.collection("nweets").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
             const newArray = snapshot.docs.map((document) => ({
                 id:document.id,
                 ...document.data(),
@@ -21,9 +21,9 @@ const Home = ({userObj}) => {
     // console.log(nweets);
 
     return (
-        <>
+        <div className="container">
             <NweetFactory userObj={userObj} />
-            <div>
+            <div style={{marginTop : 30 }}>
                 {nweets.map((nweet) => (
                     <Nweet 
                         key={nweet.id} 
@@ -32,7 +32,7 @@ const Home = ({userObj}) => {
                     />
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
